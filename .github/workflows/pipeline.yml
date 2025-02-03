@@ -13,6 +13,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore ./src/RealEstateListingAPI/RealStateListingAPI.sln
+  
+      - name: Build the solution
+        run: dotnet build ./src/RealEstateListingAPI/RealStateListingAPI.sln --configuration Release --no-restore
+  
+      - name: Run Unit Tests
+        run: dotnet test tests/RealEstateListing.UnitTests/RealEstateListing.UnitTests.csproj --configuration Release --no-build --logger "trx;LogFileName=UnitTestResults.trx"
+
       - name: DockerHub Authentication
         uses: docker/login-action@v3
         with:
