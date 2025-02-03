@@ -10,8 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RealEstateListing.Application\RealEstateListing.Application.csproj" />
+    <ProjectReference Include="..\RealEstateListing.Infrastructure\RealEstateListing.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

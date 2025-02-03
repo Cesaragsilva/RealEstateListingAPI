@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+    realestateapi:
+        build:
+            context: .
+        container_name: realestateapi
+        restart: always
+        ports:
+            - 5236:8080
+        environment: 
+            ASPNETCORE_ENVIRONMENT: Development
+        networks:
+            - realestate
+            
+networks:
+    realestate:
+        driver: bridge

@@ -1,0 +1,26 @@
+@RealEstateListingApi_HostAddress = http://localhost:5236/api
+
+GET {{RealEstateListingApi_HostAddress}}/listings/
+Accept: application/json
+
+###
+
+GET {{RealEstateListingApi_HostAddress}}/listings/{id}
+Accept: application/json
+
+###
+POST {{RealEstateListingApi_HostAddress}}/listings/
+Content-Type: application/json
+
+{
+    "id": "1",
+    "title": "Book 001",
+    "price": 100.0,
+    "description": "Good book to read."
+}
+###
+
+DELETE {{RealEstateListingApi_HostAddress}}/listings/{id}
+Accept: application/json
+
+###
