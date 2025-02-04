@@ -19,7 +19,7 @@ namespace RealEstateListing.Infrastructure.Data.Repository
 
         public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
         {
-            await dbContext.Set<T>().AddAsync(entity, cancellationToken);;
+            await dbContext.Set<T>().AddAsync(entity, cancellationToken);
             
             return entity;
         }
