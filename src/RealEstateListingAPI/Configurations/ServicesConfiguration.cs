@@ -14,7 +14,8 @@ namespace RealEstateListingApi.Configure
             services.AddControllers(options =>
             {
                 options.AddModelValidationFilter<Listing>();
-            });
+            })
+            .AddJsonOptions(c => c.AllowInputFormatterExceptionMessages = false);
 
             services.AddHealthChecks();
 

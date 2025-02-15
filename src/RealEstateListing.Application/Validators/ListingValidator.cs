@@ -10,9 +10,7 @@ namespace RealEstateListing.Application.Validators
             RuleFor(listing => listing.Price)
                 .NotNull()
                     .WithMessage("The Price is required.")
-                .Must(price => decimal.TryParse(price, out _))
-                    .WithMessage("The Price must be a valid decimal number.")
-                .Must(price => decimal.TryParse(price, out decimal result) && result > 0)
+                .GreaterThan(0)
                     .WithMessage("The Price must be greater than 0.");
 
             RuleFor(listing => listing.Title)

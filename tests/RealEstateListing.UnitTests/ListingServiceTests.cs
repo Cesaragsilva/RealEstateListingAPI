@@ -70,7 +70,7 @@ namespace RealEstateListing.UnitTests
         public async Task Should_AddListing_And_Return_The_Entity_Added()
         {
             // Arrange
-            var request = new Listing { Id = 3, Title = "New Test", Price = "30.0m" };
+            var request = new Listing { Id = 3, Title = "New Test", Price = 30.0m };
 
             // Act
             var result = await _listingService.AddAsync(request, CancellationToken.None);
@@ -88,7 +88,7 @@ namespace RealEstateListing.UnitTests
             var item = SetupMockRepositoryData().First();
             _mockRepository.Setup(repo => repo.GetByIdAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(item);
 
-            var request = new Listing { Id = 1, Title = "New Test", Price = "30.0m" };
+            var request = new Listing { Id = 1, Title = "New Test", Price = 30.0m };
 
             // Act
             var result = await _listingService.AddAsync(request, CancellationToken.None);
@@ -134,7 +134,7 @@ namespace RealEstateListing.UnitTests
         public async Task Should_Return_Error_When_Model_Is_Invalid()
         {
             // Arrange
-            var request = new Listing { Id = 1, Title = "", Price = "0" };
+            var request = new Listing { Id = 1, Title = "", Price = 0 };
             var validator = new ListingValidator();
 
             // Act
@@ -149,8 +149,8 @@ namespace RealEstateListing.UnitTests
         {
             return
             [
-                new() { Id = 1, Title = "Item 1", Price = "10", Description = "Fake Description added here" },
-                new() { Id = 2, Title = "Item 2", Price = "20"}
+                new() { Id = 1, Title = "Item 1", Price = 10, Description = "Fake Description added here" },
+                new() { Id = 2, Title = "Item 2", Price = 20}
             ];
         }
     }
