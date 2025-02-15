@@ -41,36 +41,36 @@ namespace RealEstateListing.UnitTests
         {
             // Arrange
             var listing = SetupMockRepositoryData().First();
-            _mockRepository.Setup(repo => repo.GetByIdAsync("1", It.IsAny<CancellationToken>())).ReturnsAsync(listing);
+            _mockRepository.Setup(repo => repo.GetByIdAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(listing);
 
             // & Act
-            var result = await _listingService.GetByIdAsync("1", CancellationToken.None);
+            var result = await _listingService.GetByIdAsync(1, CancellationToken.None);
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal("1", result.Id);
-            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+            Assert.Equal(1, result.Id);
+            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
         public async Task Should_ReturnsNull_WhenNotExists()
         {
             // Arrange
-            _mockRepository.Setup(repo => repo.GetByIdAsync("99", It.IsAny<CancellationToken>())).ReturnsAsync((Listing?)null);
+            _mockRepository.Setup(repo => repo.GetByIdAsync(99, It.IsAny<CancellationToken>())).ReturnsAsync((Listing?)null);
 
             // Act
-            var result = await _listingService.GetByIdAsync("99", CancellationToken.None);
+            var result = await _listingService.GetByIdAsync(99, CancellationToken.None);
 
             // Assert
             Assert.Null(result);
-            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
         public async Task Should_AddListing_And_Return_The_Entity_Added()
         {
             // Arrange
-            var request = new Listing { Id = "3", Title = "New Test", Price = 30.0m };
+            var request = new Listing { Id = 3, Title = "New Test", Price = "30.0m" };
 
             // Act
             var result = await _listingService.AddAsync(request, CancellationToken.None);
@@ -78,7 +78,7 @@ namespace RealEstateListing.UnitTests
             // Assert
             Assert.Equal(request, result.Data);
             _mockRepository.Verify(repo => repo.AddAsync(request, It.IsAny<CancellationToken>()), Times.Once);
-            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
@@ -86,16 +86,16 @@ namespace RealEstateListing.UnitTests
         {
             // Arrange
             var item = SetupMockRepositoryData().First();
-            _mockRepository.Setup(repo => repo.GetByIdAsync("1", It.IsAny<CancellationToken>())).ReturnsAsync(item);
+            _mockRepository.Setup(repo => repo.GetByIdAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(item);
 
-            var request = new Listing { Id = "1", Title = "New Test", Price = 30.0m };
+            var request = new Listing { Id = 1, Title = "New Test", Price = "30.0m" };
 
             // Act
             var result = await _listingService.AddAsync(request, CancellationToken.None);
 
             // Assert
             Assert.False(result.IsSuccess);
-            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
             _mockRepository.Verify(repo => repo.AddAsync(request, It.IsAny<CancellationToken>()), Times.Never);
         }
 
@@ -104,14 +104,14 @@ namespace RealEstateListing.UnitTests
         {
             // Arrange
             var listing = SetupMockRepositoryData().First();
-            _mockRepository.Setup(repo => repo.GetByIdAsync("1", It.IsAny<CancellationToken>())).ReturnsAsync(listing);
+            _mockRepository.Setup(repo => repo.GetByIdAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(listing);
 
             // Act
-            var result = await _listingService.DeleteAsync("1", CancellationToken.None);
+            var result = await _listingService.DeleteAsync(1, CancellationToken.None);
 
             // Assert
             Assert.True(result.IsSuccess);
-            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
             _mockRepository.Verify(repo => repo.DeleteAsync(It.IsAny<Listing>()), Times.Once);
         }
 
@@ -119,14 +119,14 @@ namespace RealEstateListing.UnitTests
         public async Task Should_Not_Delete_When_Listing_NotExists()
         {
             // Arrange
-            _mockRepository.Setup(repo => repo.GetByIdAsync("99", It.IsAny<CancellationToken>())).ReturnsAsync((Listing?)null);
+            _mockRepository.Setup(repo => repo.GetByIdAsync(99, It.IsAny<CancellationToken>())).ReturnsAsync((Listing?)null);
 
             // Act
-            var result = await _listingService.DeleteAsync("99", CancellationToken.None);
+            var result = await _listingService.DeleteAsync(99, CancellationToken.None);
 
             // Assert
             Assert.False(result.IsSuccess);
-            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
+            _mockRepository.Verify(r => r.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
             _mockRepository.Verify(repo => repo.DeleteAsync(It.IsAny<Listing>()), Times.Never);
         }
 
@@ -134,7 +134,7 @@ namespace RealEstateListing.UnitTests
         public async Task Should_Return_Error_When_Model_Is_Invalid()
         {
             // Arrange
-            var request = new Listing { Id = "1", Title = "", Price = 0 };
+            var request = new Listing { Id = 1, Title = "", Price = "0" };
             var validator = new ListingValidator();
 
             // Act
@@ -149,8 +149,8 @@ namespace RealEstateListing.UnitTests
         {
             return
             [
-                new() { Id = "1", Title = "Item 1", Price = 10.0m, Description = "Fake Description added here" },
-                new() { Id = "2", Title = "Item 2", Price = 20.0m}
+                new() { Id = 1, Title = "Item 1", Price = "10", Description = "Fake Description added here" },
+                new() { Id = 2, Title = "Item 2", Price = "20"}
             ];
         }
     }

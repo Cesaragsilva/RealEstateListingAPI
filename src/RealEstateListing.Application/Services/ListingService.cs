@@ -12,7 +12,7 @@ namespace RealEstateListing.Application.Services
             return await listingRepository.GetAllAsync(cancellationToken);
         }
 
-        public async Task<Listing?> GetByIdAsync(string id, CancellationToken cancellationToken)
+        public async Task<Listing?> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
             return await listingRepository.GetByIdAsync(id, cancellationToken);
         }
@@ -31,7 +31,7 @@ namespace RealEstateListing.Application.Services
             return ResultService.Ok(listing);
         }
 
-        public async Task<ResultService> DeleteAsync(string id, CancellationToken cancellationToken)
+        public async Task<ResultService> DeleteAsync(int id, CancellationToken cancellationToken)
         {
             var listing = await GetByIdAsync(id, cancellationToken);
 

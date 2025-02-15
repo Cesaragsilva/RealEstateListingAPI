@@ -26,7 +26,7 @@ namespace RealEstateListingApi.Controllers
         [Tags("Listings Retrieval")]
         [ProducesResponseType(typeof(Listing), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetListingById(string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetListingById(int id, CancellationToken cancellationToken)
         {
             var item = await listingService.GetByIdAsync(id, cancellationToken);
 
@@ -56,7 +56,7 @@ namespace RealEstateListingApi.Controllers
         [Tags("Listings Management")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteListing(string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteListing(int id, CancellationToken cancellationToken)
         {
             var result = await listingService.DeleteAsync(id, cancellationToken);
 

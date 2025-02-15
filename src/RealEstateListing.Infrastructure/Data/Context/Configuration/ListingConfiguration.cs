@@ -8,14 +8,12 @@ namespace RealEstateListing.Infrastructure.Data.Context.Configuration
     {
         public void Configure(EntityTypeBuilder<Listing> modelBuilder)
         {
-            //modelBuilder.HasKey(b => b.Id);
-            //modelBuilder.Property(b => b.Id).ValueGeneratedOnAdd();
-
-            modelBuilder.Property(b => b.Id)
-                .IsRequired();
+            modelBuilder.HasKey(b => b.Id);
+            modelBuilder.Property(b => b.Id).ValueGeneratedOnAdd();
 
             modelBuilder.Property(b => b.Price)
-                .IsRequired();
+                .IsRequired()
+                .HasPrecision(18, 2);
 
             modelBuilder.Property(b => b.Title)
                 .IsRequired()

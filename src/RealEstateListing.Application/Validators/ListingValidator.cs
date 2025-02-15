@@ -7,12 +7,12 @@ namespace RealEstateListing.Application.Validators
     {
         public ListingValidator()
         {
-            RuleFor(listing => listing.Id)
-                .NotEmpty()
-                    .WithMessage("{PropertyName} is required!");
-
             RuleFor(listing => listing.Price)
-                .GreaterThan(0)
+                .NotNull()
+                    .WithMessage("The Price is required.")
+                .Must(price => decimal.TryParse(price, out _))
+                    .WithMessage("The Price must be a valid decimal number.")
+                .Must(price => decimal.TryParse(price, out decimal result) && result > 0)
                     .WithMessage("The Price must be greater than 0.");
 
             RuleFor(listing => listing.Title)

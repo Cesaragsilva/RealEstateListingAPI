@@ -12,7 +12,7 @@ namespace RealEstateListing.Infrastructure.Data.Repository
             return await dbContext.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
         }
 
-        public async Task<T?> GetByIdAsync(string id, CancellationToken cancellationToken)
+        public async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
             return await dbContext.Set<T>().AsNoTracking().Where(c => c.Id == id).FirstOrDefaultAsync(cancellationToken);
         }

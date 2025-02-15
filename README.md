@@ -2,7 +2,7 @@
 
 I applied the Clean Architecture and Clean Code for building this application. Follow bellow the packages used.
 
-- EntityFrameworkCore - Used for building an in Memory Database (InMemory extension) and for access the data using ORM. I prefered to use Entity than Dapper because last versions of entity are more flexible and fast than dapper.
+- EntityFrameworkCore - Used for building an in Memory Database (InMemory extension) and for access the data using ORM. I preferred to use Entity than Dapper because last versions of entity are more flexible and fast than dapper.
 
 - FluentValidation - Used for create validations of business and for implement the Notification Partner
 
@@ -29,7 +29,5 @@ I applied the Clean Architecture and Clean Code for building this application. F
 - Execute the application using **dotnet run RealEstateListing.Api**
 
 # Improvements
-
-- Generate Listing Id using the entityframework (Identity column) 
 
 - Added any stack to monitoring this application even in the early stage (Datadog, Elastic Stack, New Relic and etc..)
